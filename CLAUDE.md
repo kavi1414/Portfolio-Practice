@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 QA portfolio site for **Kavishka Jayathilake** — QA Automation Engineer | ISTQB® CTFL Certified.
 
-Full-stack: React 19 + Vite 8 frontend (`frontend/`) and a Node.js + Express backend (`backend/`, not yet scaffolded). The site showcases 6 QA projects from Kavishka's CV and includes a contact form that sends email.
+Full-stack: React 19 + Vite 8 frontend (`frontend/`) and a Node.js + Express backend (`backend/`). The site showcases QA projects from Kavishka's CV and includes a contact form that sends email via the backend.
 
 ## Commands
 
@@ -18,11 +18,12 @@ npm run preview  # Preview production build locally
 npm run lint     # ESLint
 ```
 
-**Backend** (run from `backend/` once scaffolded):
+**Backend** (run from `backend/`):
 ```bash
 npm run dev      # Express dev server (nodemon)
 npm start        # Production start
 ```
+Requires a `.env` (see `.env.example`) with `EMAIL_USER`, `EMAIL_PASS` (Gmail app password), `EMAIL_TO`, and `FRONTEND_URL`.
 
 ## Architecture
 
@@ -32,16 +33,18 @@ npm start        # Production start
 - `src/App.css` for component styles, `src/index.css` for global/reset styles
 - Static assets in `public/` (served at root); imported assets in `src/assets/`
 - Vite config: `@vitejs/plugin-react` (Oxc transform), no path aliases yet
+- Content is data-driven: all section content lives in `src/data/` (`personal.js`, `skills.js`, `experience.js`, `projects.js`, `certifications.js`, `education.js`); components import from there rather than hardcoding content in JSX
 
-### Backend (`backend/`) — to be scaffolded
+### Backend (`backend/`)
 - Node.js + Express REST API
-- Will handle the contact form's email submission (POST `/api/contact`)
+- `POST /api/contact` validates `name`/`email`/`message` and sends the submission via Nodemailer over Gmail SMTP (see `.env.example` for required config)
+- CORS restricted to `FRONTEND_URL` (defaults to `http://localhost:5173`)
 - Keep frontend and backend as separate npm workspaces/projects
 
 ### Portfolio Content
 - **Owner:** Kavishka Jayathilake
 - **Title:** QA Automation Engineer | ISTQB® CTFL Certified
-- **Sections:** Hero, About, Projects (6 CV projects), Contact
+- **Sections:** Hero, About, Experience, Projects, Certifications, Contact
 - **Contact form:** submits to the Express backend which sends email
 
 ## Conventions
