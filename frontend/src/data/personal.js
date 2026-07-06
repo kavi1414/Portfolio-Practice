@@ -10,6 +10,8 @@ const personal = {
   cv: '/cv.pdf',
   summary:
     'Motivated Computer Science undergraduate at UCSC with an ISTQB® CTFL certification and hands-on industry experience at OrangeHRM. Specialising in test automation, API testing, and CI/CD pipeline integration. Passionate about shifting quality left and delivering reliable software through systematic testing strategies.',
+  internshipNote:
+    'Currently interning at OrangeHRM as an Automation QA Engineer, where I work with Playwright, TypeScript, MCP browser tools, and AI-assisted test healing agents. I thrive in agile environments and enjoy collaborating closely with developers to ship reliable software.',
 }
 
 export default personal

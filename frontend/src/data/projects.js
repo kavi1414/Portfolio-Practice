@@ -26,6 +26,7 @@ const projects = [
       'End-to-end automated test coverage for all key user flows',
       'Page Object Model (POM) design pattern for clean, maintainable code',
       'TestNG for test organisation, grouping, and reporting',
+      'Selenium WebDriver for browser automation and UI testing',
     ],
     tags: ['Java', 'Selenium WebDriver', 'TestNG', 'Maven', 'POM'],
     featured: true,

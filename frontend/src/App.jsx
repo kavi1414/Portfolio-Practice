@@ -1,5 +1,5 @@
-import useTheme from './hooks/useTheme'
-import useScrollReveal from './hooks/useScrollReveal'
+import useTheme from './hooks/useTheme'// Manages dark mode / light mode
+import useScrollReveal from './hooks/useScrollReveal' 
 import Navbar from './components/Navbar/Navbar'
 import Hero from './components/Hero/Hero'
 import About from './components/About/About'
@@ -11,7 +11,7 @@ import Footer from './components/Footer/Footer'
 import './App.css'
 
 function App() {
-  const { theme, toggleTheme } = useTheme()
+  const { theme, toggleTheme } = useTheme() // It gets the current theme and the function to switch the theme.
   useScrollReveal()
 
   return (

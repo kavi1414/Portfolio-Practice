@@ -1,33 +1,7 @@
 import personal from '../../data/personal'
 import skills from '../../data/skills'
+import education from '../../data/education'
 import './About.css'
-
-const education = [
-  {
-    id: 1,
-    degree: 'BSc in Computer Science',
-    school: 'University of Colombo School of Computing',
-    period: '2023 – 2026',
-    note: 'Undergraduate (Current)',
-    icon: 'graduation',
-  },
-  {
-    id: 2,
-    degree: 'Diploma in English & IT',
-    school: 'Esoft Metro College',
-    period: '2022 – 2023',
-    note: '',
-    icon: 'certificate',
-  },
-  {
-    id: 3,
-    degree: 'G.C.E A/L — 1A / 2B',
-    school: 'Kegalle Vidyalaya',
-    period: '2019 – 2022',
-    note: 'Physical Science Stream',
-    icon: 'book',
-  },
-]
 
 function About() {
   return (
@@ -41,12 +15,7 @@ function About() {
         <div className="about-bio reveal">
           <div className="about-bio-text">
             <p>{personal.summary}</p>
-            <p>
-              Currently interning at <span className="about-highlight">OrangeHRM</span> as
-              an Automation QA Engineer, where I work with Playwright, TypeScript, MCP browser
-              tools, and AI-assisted test healing agents. I thrive in agile environments and
-              enjoy collaborating closely with developers to ship reliable software.
-            </p>
+            <p>{personal.internshipNote}</p>
           </div>
           <div className="about-cards">
             <div className="about-card">
