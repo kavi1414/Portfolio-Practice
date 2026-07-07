@@ -1,7 +1,12 @@
 require("dotenv").config();
+const dns = require("dns");
 const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
+
+// Railway's containers have no outbound IPv6 route; prefer IPv4 for all
+// DNS lookups so the SMTP connection to Gmail doesn't try IPv6 and hang.
+dns.setDefaultResultOrder("ipv4first");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -13,7 +18,6 @@ const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
   secure: true,
-  family: 4,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
