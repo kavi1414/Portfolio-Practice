@@ -15,8 +15,8 @@
 }
 
 [data-theme="light"] .aurora-blob {
-  opacity: 0.4;
-  filter: blur(100px);
+  opacity: 0.18;
+  filter: blur(110px);
 }
 
 .aurora-blob--1 {

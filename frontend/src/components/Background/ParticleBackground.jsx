@@ -21,13 +21,17 @@ function hexToRgb(hex) {
 export default function ParticleBackground({ theme }) {
   const canvasRef = useRef(null)
   const colorRef = useRef({ r: 0, g: 230, b: 118 })
+  const alphaRef = useRef({ dot: 0.55, line: 0.22 })
 
-  // Re-read the accent colour whenever the theme changes.
+  // Re-read the accent colour + tune opacity whenever the theme changes.
   useEffect(() => {
     const accent = getComputedStyle(document.documentElement)
       .getPropertyValue('--accent')
     const rgb = hexToRgb(accent)
     if (rgb) colorRef.current = rgb
+    alphaRef.current = theme === 'light'
+      ? { dot: 0.4, line: 0.14 }
+      : { dot: 0.55, line: 0.22 }
   }, [theme])
 
   useEffect(() => {
@@ -76,13 +80,14 @@ export default function ParticleBackground({ theme }) {
 
     const render = () => {
       const { r, g, b } = colorRef.current
+      const { dot: dotA, line: lineA } = alphaRef.current
       ctx.clearRect(0, 0, width, height)
 
       // dots
       for (const p of particles) {
         ctx.beginPath()
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(${r},${g},${b},0.55)`
+        ctx.fillStyle = `rgba(${r},${g},${b},${dotA})`
         ctx.fill()
       }
 
@@ -96,7 +101,7 @@ export default function ParticleBackground({ theme }) {
           const dy = a.y - c.y
           const dist = Math.sqrt(dx * dx + dy * dy)
           if (dist < maxDist) {
-            const alpha = (1 - dist / maxDist) * 0.22
+            const alpha = (1 - dist / maxDist) * lineA
             ctx.beginPath()
             ctx.moveTo(a.x, a.y)
             ctx.lineTo(c.x, c.y)

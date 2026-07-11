@@ -103,6 +103,33 @@
 }
 
 /* ============================================================
+   LIGHT THEME DEPTH — soft shadows so white cards lift off the page
+   ============================================================ */
+[data-theme="light"] .about-card,
+[data-theme="light"] .skill-card,
+[data-theme="light"] .project-card,
+[data-theme="light"] .edu-item,
+[data-theme="light"] .timeline-card,
+[data-theme="light"] .cert-card,
+[data-theme="light"] .cert-featured-card,
+[data-theme="light"] .contact-form,
+[data-theme="light"] .contact-link,
+[data-theme="light"] .hero-stats {
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme="light"] .about-card:hover,
+[data-theme="light"] .skill-card:hover,
+[data-theme="light"] .project-card:hover,
+[data-theme="light"] .edu-item:hover,
+[data-theme="light"] .timeline-card:hover,
+[data-theme="light"] .cert-card:hover,
+[data-theme="light"] .cert-featured-card:hover,
+[data-theme="light"] .contact-link:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* ============================================================
    SCROLL REVEAL
    ============================================================ */
 .reveal {
