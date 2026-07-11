@@ -47,7 +47,12 @@ function Contact() {
             </p>
 
             <div className="contact-links">
-              <a href={`mailto:${personal.email}`} className="contact-link reveal">
+              <a
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${personal.email}`}
+                target="_blank"
+                rel="noreferrer"
+                className="contact-link reveal"
+              >
                 <EmailIcon />
                 <div>
                   <span className="contact-link-label">Email</span>

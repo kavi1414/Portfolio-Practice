@@ -16,6 +16,7 @@ function About() {
           <div className="about-bio-text">
             <p>{personal.summary}</p>
             <p>{personal.internshipNote}</p>
+            <p>{personal.careerGoal}</p>
           </div>
           <div className="about-cards">
             <div className="about-card">
