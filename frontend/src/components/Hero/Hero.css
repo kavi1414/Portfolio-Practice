@@ -104,8 +104,9 @@
   font-family: var(--font-body);
   font-size: clamp(16px, 2vw, 20px);
   font-weight: 500;
-  color: var(--text-secondary);
+  color: var(--accent);
   margin-bottom: var(--sp-3);
+  min-height: 1.6em;
   animation: fadeUp 0.5s ease both;
   animation-delay: 0.3s;
 }
@@ -191,8 +192,16 @@
   animation: floatY 6s ease-in-out infinite;
 }
 
+/* Tilt layer — holds the photo + rings, tilts toward the cursor on hover */
+.hero-photo-tilt {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  z-index: 1;
+}
+
 /* Rotating accent ring around the photo */
-.hero-photo-wrap::before {
+.hero-photo-tilt::before {
   content: '';
   position: absolute;
   inset: -12px;
@@ -204,6 +213,7 @@
   -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px));
           mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px));
 }
+
 
 @keyframes floatY {
   0%, 100% { transform: translateY(0); }

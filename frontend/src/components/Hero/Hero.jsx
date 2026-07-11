@@ -1,7 +1,15 @@
 import personal from '../../data/personal'
 import profileImg from '../../assets/profile.jpg'
 import CountUp from '../CountUp/CountUp'
+import Typewriter from '../Typewriter/Typewriter'
 import './Hero.css'
+
+const ROLES = [
+  'QA Automation Engineer',
+  'ISTQB® CTFL Certified',
+  'Playwright · TypeScript',
+  'API & CI/CD Testing',
+]
 
 function Hero({ ready = true }) {
   return (
@@ -20,7 +28,9 @@ function Hero({ ready = true }) {
             <span className="hero-name-accent">{personal.name}</span>
           </h1>
 
-          <p className="hero-title">{personal.title}</p>
+          <p className="hero-title">
+            <Typewriter phrases={ROLES} />
+          </p>
 
           <p className="hero-summary">{personal.summary}</p>
 
@@ -49,8 +59,10 @@ function Hero({ ready = true }) {
         {/* ── Right: Photo + Stats ── */}
         <div className="hero-visual">
           <div className="hero-photo-wrap">
-            <img src={profileImg} alt={personal.name} className="hero-photo" />
-            <div className="hero-photo-ring" />
+            <div className="hero-photo-tilt">
+              <img src={profileImg} alt={personal.name} className="hero-photo" />
+              <div className="hero-photo-ring" />
+            </div>
           </div>
 
           <div className="hero-stats">

@@ -5,6 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   background: var(--bg-primary);
   transition: opacity 0.6s ease, visibility 0.6s ease;
 }
@@ -15,7 +16,69 @@
   pointer-events: none;
 }
 
+/* Faint grid, masked to fade toward the edges */
+.preloader::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0, 230, 118, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 230, 118, 0.05) 1px, transparent 1px);
+  background-size: 42px 42px;
+  -webkit-mask: radial-gradient(circle at center, #000 25%, transparent 72%);
+          mask: radial-gradient(circle at center, #000 25%, transparent 72%);
+}
+
+/* ── Animated backdrop ── */
+.preloader-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.preloader-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.45;
+  will-change: transform;
+}
+
+.preloader-blob--1 {
+  width: 360px;
+  height: 360px;
+  top: -90px;
+  left: -60px;
+  background: radial-gradient(circle, rgba(0, 230, 118, 0.28), transparent 70%);
+  animation: pBlob1 12s ease-in-out infinite;
+}
+
+.preloader-blob--2 {
+  width: 300px;
+  height: 300px;
+  bottom: -80px;
+  right: -50px;
+  background: radial-gradient(circle, rgba(0, 200, 160, 0.20), transparent 70%);
+  animation: pBlob2 15s ease-in-out infinite;
+}
+
+/* Sweeping scan line */
+.preloader-scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 140px;
+  top: -140px;
+  background: linear-gradient(to bottom, transparent, rgba(0, 230, 118, 0.06), transparent);
+  animation: pScan 3.2s linear infinite;
+}
+
+/* ── Content box ── */
 .preloader-box {
+  position: relative;
+  z-index: 1;
   width: 320px;
   max-width: 82vw;
   display: flex;
@@ -23,8 +86,9 @@
   align-items: flex-start;
 }
 
-/* Logo mark */
+/* Logo mark with a spinning loading arc */
 .preloader-logo {
+  position: relative;
   width: 56px;
   height: 56px;
   border-radius: 50%;
@@ -43,6 +107,16 @@
 
 [data-theme="dark"] .preloader-logo {
   box-shadow: 0 0 28px rgba(0, 230, 118, 0.25);
+}
+
+.preloader-logo::after {
+  content: '';
+  position: absolute;
+  inset: -7px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: var(--accent);
+  animation: preloaderSpin 1.1s linear infinite;
 }
 
 .preloader-title {
@@ -70,13 +144,15 @@
   gap: 10px;
   font-size: 13px;
   color: var(--text-muted);
-  opacity: 0.45;
-  transition: color 0.3s ease, opacity 0.3s ease;
+  opacity: 0.4;
+  transform: translateX(-8px);
+  transition: color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
 }
 
 .preloader-item.is-checked {
   color: var(--text-primary);
   opacity: 1;
+  transform: translateX(0);
 }
 
 .preloader-check {
@@ -100,9 +176,27 @@
   transform: scale(1);
 }
 
-/* Progress bar */
-.preloader-bar {
+/* Draw the tick */
+.preloader-check svg polyline {
+  stroke-dasharray: 26;
+  stroke-dashoffset: 26;
+  transition: stroke-dashoffset 0.35s ease 0.08s;
+}
+
+.preloader-item.is-checked .preloader-check svg polyline {
+  stroke-dashoffset: 0;
+}
+
+/* Progress meter */
+.preloader-meter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   width: 100%;
+}
+
+.preloader-bar {
+  flex: 1;
   height: 3px;
   border-radius: var(--radius-full);
   background: var(--border);
@@ -117,7 +211,35 @@
   transition: width 0.35s ease;
 }
 
+.preloader-percent {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  min-width: 34px;
+  text-align: right;
+}
+
 @keyframes preloaderPulse {
   0%, 100% { transform: scale(1); opacity: 1; }
   50%      { transform: scale(1.06); opacity: 0.85; }
+}
+
+@keyframes preloaderSpin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pBlob1 {
+  0%, 100% { transform: translate(0, 0); }
+  50%      { transform: translate(60px, 40px); }
+}
+
+@keyframes pBlob2 {
+  0%, 100% { transform: translate(0, 0); }
+  50%      { transform: translate(-50px, -30px); }
+}
+
+@keyframes pScan {
+  0%   { top: -140px; }
+  100% { top: 100%; }
 }

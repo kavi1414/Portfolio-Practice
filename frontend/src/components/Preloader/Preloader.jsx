@@ -11,8 +11,9 @@ const CHECKS = [
 ]
 
 /**
- * QA-themed intro screen: a checklist of "quality checks" tick off one by one,
- * then the whole overlay fades away to reveal the site. Honours reduced motion.
+ * QA-themed intro screen: a checklist of "quality checks" tick off one by one
+ * over an animated backdrop, then the overlay fades away to reveal the site.
+ * Honours reduced motion.
  */
 export default function Preloader({ onComplete }) {
   const [checked, setChecked] = useState(0)
@@ -52,8 +53,17 @@ export default function Preloader({ onComplete }) {
     return () => clearTimeout(t)
   }, [done, onComplete])
 
+  const percent = Math.round((checked / CHECKS.length) * 100)
+
   return (
     <div className={`preloader${done ? ' preloader--done' : ''}`} aria-hidden="true">
+      {/* Animated backdrop */}
+      <div className="preloader-bg">
+        <span className="preloader-blob preloader-blob--1" />
+        <span className="preloader-blob preloader-blob--2" />
+        <span className="preloader-scan" />
+      </div>
+
       <div className="preloader-box">
         <div className="preloader-logo">KJ</div>
         <p className="preloader-title">Running quality checks</p>
@@ -75,11 +85,11 @@ export default function Preloader({ onComplete }) {
           ))}
         </ul>
 
-        <div className="preloader-bar">
-          <div
-            className="preloader-bar-fill"
-            style={{ width: `${(checked / CHECKS.length) * 100}%` }}
-          />
+        <div className="preloader-meter">
+          <div className="preloader-bar">
+            <div className="preloader-bar-fill" style={{ width: `${percent}%` }} />
+          </div>
+          <span className="preloader-percent">{percent}%</span>
         </div>
       </div>
     </div>

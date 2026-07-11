@@ -23,7 +23,7 @@ function App() {
   const [loading, setLoading] = useState(true)
 
   useScrollReveal()
-  useTilt('.skill-card, .project-card')
+  useTilt('.skill-card, .project-card, .hero-photo-tilt')
   useMagnetic('.btn, .nav-cv-btn')
 
   return (
