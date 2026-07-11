@@ -1,0 +1,37 @@
+/* Hide the native cursor only when the custom one is active */
+.has-custom-cursor,
+.has-custom-cursor * {
+  cursor: none !important;
+}
+
+.glow-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  color: var(--accent);
+  filter: drop-shadow(0 0 3px var(--accent)) drop-shadow(0 0 7px var(--accent));
+  will-change: transform;
+}
+
+.glow-cursor svg {
+  display: block;
+  transition: transform 0.18s ease;
+}
+
+/* Grow + intensify glow over clickable things */
+.glow-cursor.is-hovering {
+  filter: drop-shadow(0 0 4px var(--accent))
+          drop-shadow(0 0 10px var(--accent))
+          drop-shadow(0 0 18px var(--accent));
+}
+
+.glow-cursor.is-hovering svg {
+  transform: scale(1.3);
+}
+
+/* Click feedback */
+.glow-cursor.is-down svg {
+  transform: scale(0.82);
+}

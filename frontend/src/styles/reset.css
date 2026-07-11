@@ -14,6 +14,9 @@ html {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  /* Solid base colour behind the fixed particle canvas */
+  background-color: var(--bg-primary);
+  transition: background-color var(--ease-slow);
   /* Offset anchor scroll so sticky nav doesn't cover section headings */
   scroll-padding-top: var(--nav-height);
 }
@@ -27,8 +30,19 @@ body {
   font-size: 16px;
   line-height: 1.6;
   color: var(--text-primary);
-  background-color: var(--bg-primary);
-  transition: background-color var(--ease-slow), color var(--ease-slow);
+  /* Transparent so the particle canvas (z-index -1) shows through */
+  background-color: transparent;
+  transition: color var(--ease-slow);
+}
+
+/* Accessibility: respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Prevent iOS Safari from zooming in on form focus */

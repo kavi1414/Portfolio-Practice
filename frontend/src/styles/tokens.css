@@ -38,7 +38,7 @@
    ======================== */
 [data-theme="dark"] {
   --bg-primary:   #0a0a0a;
-  --bg-secondary: #0f0f0f;
+  --bg-secondary: rgba(15, 15, 15, 0.55);
   --bg-card:      #141414;
   --bg-card-hover:#1a1a1a;
 
@@ -73,7 +73,7 @@
    ======================== */
 [data-theme="light"] {
   --bg-primary:   #ffffff;
-  --bg-secondary: #f8fafc;
+  --bg-secondary: rgba(248, 250, 252, 0.6);
   --bg-card:      #ffffff;
   --bg-card-hover:#f1f5f9;
 

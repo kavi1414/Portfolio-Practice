@@ -106,13 +106,18 @@
    SCROLL REVEAL
    ============================================================ */
 .reveal {
-  opacity: 0;
-  transform: translateY(28px);
   transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.reveal.is-revealed {
+/* Only hide-before-reveal while the reveal script is active. If JS ever fails
+   to run, content stays fully visible instead of getting stuck invisible. */
+html.js-reveal .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+html.js-reveal .reveal.is-revealed {
   opacity: 1;
   transform: none;
 }

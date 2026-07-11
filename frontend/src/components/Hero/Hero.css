@@ -188,6 +188,30 @@
   width: 280px;
   height: 280px;
   flex-shrink: 0;
+  animation: floatY 6s ease-in-out infinite;
+}
+
+/* Rotating accent ring around the photo */
+.hero-photo-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0%, var(--accent) 22%, transparent 45%);
+  opacity: 0.55;
+  z-index: 0;
+  animation: spin 9s linear infinite;
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px));
+          mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px));
+}
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 .hero-photo {

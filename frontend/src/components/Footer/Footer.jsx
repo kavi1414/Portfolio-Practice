@@ -88,7 +88,7 @@ function Footer() {
 
 function KJLogo() {
   return (
-    <svg width="180" height="87" viewBox="100 60 480 230" xmlns="http://www.w3.org/2000/svg"
+    <svg width="112" height="86" viewBox="190 60 300 230" xmlns="http://www.w3.org/2000/svg"
       style={{ color: 'var(--accent)' }}>
       <circle cx="340" cy="140" r="80" fill="none" stroke="currentColor" strokeWidth="2"/>
       <text x="340" y="158" textAnchor="middle" fontFamily="Helvetica, Arial, sans-serif"

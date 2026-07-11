@@ -1,8 +1,9 @@
 import personal from '../../data/personal'
 import profileImg from '../../assets/profile.jpg'
+import CountUp from '../CountUp/CountUp'
 import './Hero.css'
 
-function Hero() {
+function Hero({ ready = true }) {
   return (
     <section id="hero">
       <div className="hero-inner">
@@ -54,17 +55,17 @@ function Hero() {
 
           <div className="hero-stats">
             <div className="stat">
-              <span className="stat-number">7+</span>
+              <span className="stat-number"><CountUp end={7} suffix="+" start={ready} /></span>
               <span className="stat-label">Projects</span>
             </div>
             <div className="stat-divider" />
             <div className="stat">
-              <span className="stat-number">10+</span>
+              <span className="stat-number"><CountUp end={10} suffix="+" start={ready} /></span>
               <span className="stat-label">Certifications</span>
             </div>
             <div className="stat-divider" />
             <div className="stat">
-              <span className="stat-number">1+</span>
+              <span className="stat-number"><CountUp end={1} suffix="+" start={ready} /></span>
               <span className="stat-label">Years Exp.</span>
             </div>
           </div>

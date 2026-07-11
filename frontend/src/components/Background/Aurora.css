@@ -1,0 +1,62 @@
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: -2; /* behind the particle canvas (-1) */
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.aurora-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.55;
+  will-change: transform;
+}
+
+[data-theme="light"] .aurora-blob {
+  opacity: 0.4;
+  filter: blur(100px);
+}
+
+.aurora-blob--1 {
+  width: 520px;
+  height: 520px;
+  top: -120px;
+  left: -100px;
+  background: radial-gradient(circle, rgba(0, 230, 118, 0.20), transparent 70%);
+  animation: auroraDrift1 24s ease-in-out infinite;
+}
+
+.aurora-blob--2 {
+  width: 460px;
+  height: 460px;
+  top: 30%;
+  right: -140px;
+  background: radial-gradient(circle, rgba(0, 200, 160, 0.16), transparent 70%);
+  animation: auroraDrift2 30s ease-in-out infinite;
+}
+
+.aurora-blob--3 {
+  width: 420px;
+  height: 420px;
+  bottom: -120px;
+  left: 35%;
+  background: radial-gradient(circle, rgba(0, 230, 118, 0.13), transparent 70%);
+  animation: auroraDrift3 27s ease-in-out infinite;
+}
+
+@keyframes auroraDrift1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(140px, 90px) scale(1.1); }
+}
+
+@keyframes auroraDrift2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(-120px, 60px) scale(1.08); }
+}
+
+@keyframes auroraDrift3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(80px, -100px) scale(1.12); }
+}
