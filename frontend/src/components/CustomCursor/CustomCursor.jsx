@@ -1,17 +1,21 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './CustomCursor.css'
 
 /**
  * Neon "glow" cursor: an outlined arrow pointer with a green glow that tracks
  * the mouse exactly. Grows/brightens over interactive elements and dips on
- * click. Falls back to the native cursor on touch devices.
+ * click. Renders nothing at all on touch devices (no real mouse), so it can
+ * never sit frozen in one place.
  */
 export default function CustomCursor() {
   const ref = useRef(null)
+  const [enabled] = useState(() =>
+    typeof window !== 'undefined' &&
+    window.matchMedia('(hover: hover) and (pointer: fine)').matches
+  )
 
   useEffect(() => {
-    const coarse = window.matchMedia('(hover: none)').matches
-    if (coarse) return
+    if (!enabled) return
 
     const el = ref.current
     document.body.classList.add('has-custom-cursor')
@@ -51,7 +55,9 @@ export default function CustomCursor() {
       window.removeEventListener('mouseup', onUp)
       if (raf) cancelAnimationFrame(raf)
     }
-  }, [])
+  }, [enabled])
+
+  if (!enabled) return null
 
   return (
     <div ref={ref} className="glow-cursor" aria-hidden="true">
